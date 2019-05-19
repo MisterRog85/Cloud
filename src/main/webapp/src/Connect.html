@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Tiny Pet</title>
+	<script src="https://apis.google.com/js/platform.js" async defer>
+	</script>
+	<meta name="google-signin-client_id" 
+	content="800940661842-gut5e6c6n8devk141kcqitn91hgesdp0.apps.googleusercontent.com">  
+</head>
+<body>
+	
+
+<!--  Sign In Button -->
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+ <a href="#">
+ 	<input 	type="button" 
+ 			name="Sign in" 
+ 			value="Sign in" 
+ 			onclick="onSignIn();">
+ </a>
+    <script>
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+      }      
+    </script>
+    
+    
+    <!-- Sign out -->
+	<a href="#" onclick="signOut();">Sign out</a>
+	<script>
+  	function signOut() {
+   	 var auth2 = gapi.auth2.getAuthInstance();
+  	  auth2.signOut().then(function () {
+   	   console.log('User signed out.');
+   	 });
+  	}
+</script>
+
+</body>
+</html>
