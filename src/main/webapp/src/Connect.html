@@ -22,6 +22,10 @@
     <script>
       function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
+        //accèder aux données du profil
+        //profile.getId();
+        //profile.getEmail();
+        //profile.getName();
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
       }      
