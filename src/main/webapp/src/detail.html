@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="styles.css" rel="stylesheet"  type="text/css"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>TinyPet</title>
+</head>
+<body>
+	<script src="https://unpkg.com/mithril/mithril.js"></script>
+	<script>
+		var Score = {
+			list: [],
+			   loadList: function() {
+			       return m.request({
+			           method: "GET",
+			           url: "https://projetproprev2.appspot.com/_ah/api/cloud/v1/detailPet/"+
+			       })
+			       .then(function(result) {
+			           Score.list = result.items
+			       	console.log("got:",result.items)
+			       	m.redraw(true) // force
+			       })
+			 	}
+		}
+		var DetailView = {
+				oninit: Detail.loadList,
+			    view: function() {
+			        return m(".user-list", Detail.list.map(function(item) {
+			            return m(".user-list-item", [
+			                m("h1", User.current.firstName),
+			                m("h6", "Proposé par : " + User.current.firstName + " " + User.current.lastName),
+			                m("br"),
+			                m("h4", User.current.lastName + " signataires"),
+			                m("p", "lorem ipsum blablabla Nous configurons le Node ID de l’ancre en dans le message d’avertising, et pouvons donc associer la node à des coordonnées GPS pour réaliser nous même une triangulation de l’utilisateur mobile."),
+			                m("button", {class: "btn btn-primary my-2 my-sm-0"},"Signer la pétition"),
+			            ])
+	
+			        }))
+			    },
+				
+		}
+	
+	</script>
+</body>
+</html>

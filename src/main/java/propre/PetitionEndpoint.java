@@ -59,5 +59,16 @@ public class PetitionEndpoint {
 			List<Entity> result = prepQuery.asList(FetchOptions.Builder.withDefaults());
 			return result;
 	}
+	
+	@ApiMethod(name = "detailPet")
+	public List<Entity> detailPet(@Named("id") int id) {
+		Filter propertyFilter =
+			    new FilterPredicate("id", FilterOperator.EQUAL, id);
+		Query q = new Query("detailPetition").setFilter(propertyFilter);
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		PreparedQuery prepQuery = datastore.prepare(q);
+		List<Entity> result = prepQuery.asList(FetchOptions.Builder.withDefaults());
+		return result;
+	}
 
 }
