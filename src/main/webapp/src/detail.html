@@ -14,7 +14,7 @@
 			   loadList: function() {
 			       return m.request({
 			           method: "GET",
-			           url: "https://projetproprev2.appspot.com/_ah/api/cloud/v1/entity"
+			           url: "https://projetproprev2.appspot.com/_ah/api/cloud/v1/detailPet/"+
 			       })
 			       .then(function(result) {
 			           Score.list = result.items
