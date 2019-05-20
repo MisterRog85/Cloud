@@ -55,7 +55,7 @@
 		    view: function() {
 		        return m(".user-list", Score.list.map(function(item) {
 		            //return m(".user-list-item", item.properties.owner + " " + item.properties.contenu +" "+ item.properties.titre),
-		            return m("a.user-list-item", {href: "/view/" + item.key.id, oncreate: m.route.link}, item.properties.owner + " " + item.properties.contenu +" "+ item.properties.titre)
+		            return m("a.user-list-item", {href: "/src/detail.html?id=" + item.properties.id}, item.properties.titre)
 
 		        }))
 		    },

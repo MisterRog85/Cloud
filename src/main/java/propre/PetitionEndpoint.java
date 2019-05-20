@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -40,9 +41,10 @@ public class PetitionEndpoint {
 			e.setProperty("owner", owner);
 			e.setProperty("titre", titre);
 			e.setProperty("contenu", contenu);
-			ArrayList<String> signataire= new ArrayList<>();
-			e.setProperty("signataires", signataire);
-			e.setProperty("nbSignataires", 0);		
+			e.setProperty("nbSignataires", 0);
+			int randomNum = ThreadLocalRandom.current().nextInt(1000, 10000 + 1);
+			String id = titre.replace("\\s+","") + Integer.toString(randomNum);
+			e.setProperty("id", id);
 			
 
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -60,11 +62,11 @@ public class PetitionEndpoint {
 			return result;
 	}
 	
-	@ApiMethod(name = "detailPet")
-	public List<Entity> detailPet(@Named("id") int id) {
+	@ApiMethod(name = "detailPet", httpMethod = HttpMethod.GET)
+	public List<Entity> detailPet(@Named("id") String id) {
 		Filter propertyFilter =
 			    new FilterPredicate("id", FilterOperator.EQUAL, id);
-		Query q = new Query("detailPetition").setFilter(propertyFilter);
+		Query q = new Query("Petition").setFilter(propertyFilter);
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		PreparedQuery prepQuery = datastore.prepare(q);
 		List<Entity> result = prepQuery.asList(FetchOptions.Builder.withDefaults());

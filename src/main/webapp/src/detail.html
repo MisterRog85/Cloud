@@ -9,15 +9,32 @@
 <body>
 	<script src="https://unpkg.com/mithril/mithril.js"></script>
 	<script>
-		var Score = {
+		function getUrlVars() {
+		    var vars = {};
+		    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		        vars[key] = value;
+		    });
+		    return vars;
+		}
+		var Hello = {
+			    view: function() {
+			    	return m("main", [
+			            m("h1", {class: "title"}, "My second app  mithril detail"),
+			            m("div", {id: "box"}, m(DetailView)),
+			        ])
+			    }
+		}
+		var Detail = {
 			list: [],
 			   loadList: function() {
+				   var parametre = getUrlVars()["id"]
+				   console.log("got:",parametre)
 			       return m.request({
 			           method: "GET",
-			           url: "https://projetproprev2.appspot.com/_ah/api/cloud/v1/detailPet/"+
+			           url: "https://projetproprev2.appspot.com/_ah/api/cloud/v1/detailPet/"+parametre
 			       })
 			       .then(function(result) {
-			           Score.list = result.items
+			           Detail.list = result.items
 			       	console.log("got:",result.items)
 			       	m.redraw(true) // force
 			       })
@@ -26,13 +43,13 @@
 		var DetailView = {
 				oninit: Detail.loadList,
 			    view: function() {
-			        return m(".user-list", Detail.list.map(function(item) {
-			            return m(".user-list-item", [
-			                m("h1", User.current.firstName),
-			                m("h6", "Proposé par : " + User.current.firstName + " " + User.current.lastName),
+			        return m(".detail-list", Detail.list.map(function(item) {
+			            return m(".detail-list-item", [
+			                m("h1", item.properties.titre),
+			                m("h6", "Proposé par : " + item.properties.owner),
 			                m("br"),
-			                m("h4", User.current.lastName + " signataires"),
-			                m("p", "lorem ipsum blablabla Nous configurons le Node ID de l’ancre en dans le message d’avertising, et pouvons donc associer la node à des coordonnées GPS pour réaliser nous même une triangulation de l’utilisateur mobile."),
+			                m("h4", item.properties.nbSignataires + " signataires"),
+			                m("p", item.properties.contenu),
 			                m("button", {class: "btn btn-primary my-2 my-sm-0"},"Signer la pétition"),
 			            ])
 	
@@ -40,7 +57,7 @@
 			    },
 				
 		}
-	
+		m.mount(document.body, Hello)	
 	</script>
 </body>
 </html>
