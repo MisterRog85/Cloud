@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>Accueil</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-
-    <script src="https://unpkg.com/mithril/mithril.js"></script>
-
-
-	<script src="https://unpkg.com/mithril/mithril.js"></script>
-
-	<script>
+	<head>
+		<meta charset="UTF-8">
+		<title>Accueil</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+		
+		<script src="https://unpkg.com/mithril/mithril.js"></script>
+		
+		
+		<script src="https://unpkg.com/mithril/mithril.js"></script>
+		
+		<script>
     var root = document.body
+			var Links ={
+					view: function() {
+						 return m("main", [
+							 m("h1",  "Tiny Pet"),
+							 m("button",[m("a", {href:"Connect.html"}, "Se connecter"),]),
+							  // m("li",[m("a", {href:"index.html"}, "Liste des fonctionnalités disponibles"),]),
+							 m("li",[m("a", {href:"newPet.html"}, "Créer une pétition"),]),
+						   m("li",[m("a", {href:"seeTopPet.html"}, "Voir les top 100 pétitions"),]),
+			
+							//m("h1", {class: "title"}, "Trending petitions"),
+							 //m("div", {id: "box"}, m(PetitionView)),
+						 ])
+					 }
+			}
     // appel REST pour manipuler les entite
 		var Petition = {
 		    list: [],
@@ -40,21 +54,7 @@
 	 	    },
 	 }
     
-	 var Affiche ={
-    		 view: function() {
- 	 	    	return m("main", [
- 	 	            m("h1",  "Tiny Pet"),
- 	 	            m("button",[m("a", {href:"Connect.html"}, "Se connecter"),]),
- 	 	         	// m("li",[m("a", {href:"index.html"}, "Liste des fonctionnalités disponibles"),]),
- 	 	            m("li",[m("a", {href:"newPet.html"}, "Créer une pétition"),]),
-					m("li",[m("a", {href:"seeTopPet.html"}, "Voir les top 100 pétitions"),]),
-
- 			        //m("h1", {class: "title"}, "Trending petitions"),
- 	 	            //m("div", {id: "box"}, m(PetitionView)),
- 	 	        ])
- 	 	    }
-    }
- m.mount(root, Affiche)	
+ m.mount(root, Links)	
 	</script>
 </body>
 </html>
