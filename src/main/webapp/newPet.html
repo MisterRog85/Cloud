@@ -77,16 +77,16 @@
 		            //     oninput: function (e) {Score.current.owner=e.target.value},
 		            //     value: Score.current.owner
 		            // }),
-		            m("label.label", ""),
+		            m("tr", m("label.label", ""),
 		            m("input.input[type=text][placeholder=Titre de la pétition]", {
 		                oninput: function (e) {Score.current.titre=e.target.value},
 		                value: Score.current.titre
-		            }),
-                    m("label.label", "\n"),
-		            m("input.input[type=text][placeholder=contenu][style=width:600px; height:200px;]", {
+		            }),),
+                    m("tr", m("textarea.text-class[placeholder=contenu][style=width:600px; height:200px;]", {
 		                oninput: function (e) {Score.current.contenu=e.target.value},
 		                value: Score.current.contenu
-		            }),
+		            }),),
+		           
 		            m("button.button[type=submit]", "Save"),
 		        ])
 		    }

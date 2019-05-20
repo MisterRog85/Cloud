@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="styles.css" rel="stylesheet"  type="text/css"/>
+<!-- <link href="styles.css" rel="stylesheet"  type="text/css"/> -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>TinyPet</title>
 </head>
@@ -53,18 +53,31 @@
 	var ScoreView = {
 			oninit: Score.loadList,
 		    view: function() {
-                // return m()
-		        return m(".user-list", Score.list.map(function(item) {
-		            //return m(".user-list-item", item.properties.owner + " " + item.properties.contenu +" "+ item.properties.titre),
-                    return m(
-                        
-                        
-                        "tr",[
-                                    // m("a.user-list-item", {href: "/view/" + item.key.id, oncreate: m.route.link}, item.properties.titre+" "+ item.properties.contenu +" " )
-                                  m('td', {style: 'width:100px'}, [m("a.user-list-item", {href: "/view/" + item.key.id, oncreate: m.route.link}, item.properties.titre)]),
-                                  m('td', {style: 'width:100px'}, [m("a.user-list-item", {href: "/view/" + item.key.id, oncreate: m.route.link}, item.properties.contenu)]),
-                                  ])
-		        }))
+                return m("table",[
+                    m("div",[
+                        m('thead', m('tr', [m('th', 'Titre'), m('th','Contenu'), m('th',{style: 'align= "left"'}, 'Signatures')])),
+                        m("tbody", [
+                            m(".user-list", Score.list.map(function(item) {
+                                //return m(".user-list-item", item.properties.owner + " " + item.properties.contenu +" "+ item.properties.titre),
+                                return m(
+                                    
+                                    
+                                    "tr",[
+                                                // m("a.user-list-item", {href: "/view/" + item.key.id, oncreate: m.route.link}, item.properties.titre+" "+ item.properties.contenu +" " )
+                                            m('td', {style: 'width:50px'}, [m("a.user-list-item", {href: "/view/" + item.key.id, oncreate: m.route.link}, item.properties.titre)]),
+                                            m('td', {style: 'word-break: break-all'}, [m("a.user-list-item", item.properties.contenu)]),
+                                            m('td', [m("a.user-list-item", item.properties.nbSignataires)]),
+                                            ])
+                            }))
+
+                        ])
+
+
+                    ]) 
+
+                ] )
+                
+                
 		    },
 			
 	}
