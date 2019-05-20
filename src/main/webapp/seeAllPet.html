@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<link href="styles.css" rel="stylesheet"  type="text/css"/>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<title>TinyPet</title>
-</head>
-<body>
-
-
-
-	<script src="https://unpkg.com/mithril/mithril.js"></script>
-	<script>	
+    <head>
+        <meta charset="UTF-8">
+        <link href="styles.css" rel="stylesheet"  type="text/css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>TinyPet</title>
+    </head>
+    <body>
+        
+        
+        
+        <script src="https://unpkg.com/mithril/mithril.js"></script>
+        <script>	
 	
+
+    var Links ={
+                view: function() {
+                    return m("main", [
+                    m("li",[m("a", {href:"newPet.html"}, "Créer une pétition"),]),
+                    m("li",[m("a", {href:"seeTopPet.html"}, "Voir les top 100 pétitions"),]),
+                    m("li",[m("a", {href:"index.html"}, "Accueil"),]),
+                    ])
+                }
+    }
 	
 	var seeTopPet = {
 	    view: function() {
 	    	return m("main", [
-	            m("h1", {class: "title"}, "Les top pétitions"),
+	            m("h1", {class: "title"}, "Les pétitions"),
 	            m("div", {id: "box"}, m(ScoreView)),
                 m("div", {id: "box"}, m(Links)),
 	        ])
@@ -34,6 +44,7 @@
 			            Score.list = result.items
 			        	console.log("got:",result.items)
 			        	m.redraw(true) // force
+
 			        })
 			    },
 		    current: {},
@@ -44,7 +55,7 @@
 		            url: "https://projetproprev2.appspot.com/_ah/api/cloud/v1/newPet/"+Score.current.owner+"/"+Score.current.contenu+"/"+Score.current.titre
 		        })
 		        .then(function(result) {
-		        	console.log("got:",result)
+		        	// console.log("got:",result)
 		        	Score.loadList()
 		        })
 		    }
@@ -81,16 +92,6 @@
 		    },
 			
 	}
-
-    var Links ={
-    		 view: function() {
- 	 	    	return m("main", [
- 	 	            m("li",[m("a", {href:"seeAllPet.html"}, "Voir les pétitions"),]),
-                    m("li",[m("a", {href:"newPet.html"}, "Créer une pétition"),]),					
-                    m("li",[m("a", {href:"index.html"}, "Accueil"),]),
- 	 	        ])
- 	 	    }
-    }
 	
 	
 	m.mount(document.body, seeTopPet)	

@@ -13,7 +13,7 @@
 
 <!--  Sign In Button -->
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
- <a href="#">
+ <a href="index.html">
  	<input 	type="button" 
  			name="Sign in" 
  			value="Sign in" 
@@ -21,12 +21,7 @@
  </a>
     <script>
       function onSignIn(googleUser) {
-        //var profile = googleUser.getBasicProfile();
-        //acc�der aux donn�es du profil
-        //console.log(profile.getEmail());
-        //profile.getEmail();
-        //profile.getName();
-        // The ID token you need to pass to your backend:
+
         var id_token = googleUser.getAuthResponse().id_token;
 				
 				var xhr = new XMLHttpRequest();
