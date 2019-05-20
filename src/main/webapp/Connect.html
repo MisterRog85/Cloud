@@ -6,7 +6,7 @@
 	<script src="https://apis.google.com/js/platform.js" async defer>
 	</script>
 	<meta name="google-signin-client_id" 
-	content="800940661842-gut5e6c6n8devk141kcqitn91hgesdp0.apps.googleusercontent.com">  
+	content="78500750640-dgr22a80mg25vu0g776vmtj1gmdvha8h.apps.googleusercontent.com">  
 </head>
 <body>
 	
@@ -21,19 +21,29 @@
  </a>
     <script>
       function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        //accèder aux données du profil
-        //profile.getId();
+        //var profile = googleUser.getBasicProfile();
+        //accï¿½der aux donnï¿½es du profil
+        //console.log(profile.getEmail());
         //profile.getEmail();
         //profile.getName();
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
+				
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', 'https://yourbackend.example.com/tokensignin');
+				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				xhr.onload = function() {
+  				console.log('Signed in as: ' + xhr.responseText);
+				};
+				xhr.send('idtoken=' + id_token);
+					
+				//m("li",[m("a", {href:"homepage.html"}, "Accueil"),])
       }      
     </script>
     
     
     <!-- Sign out -->
-	<a href="#" onclick="signOut();">Sign out</a>
+	<a href="index.html" onclick="signOut();">Sign out</a>
 	<script>
   	function signOut() {
    	 var auth2 = gapi.auth2.getAuthInstance();
